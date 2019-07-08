@@ -1,2 +1,4 @@
-# 01_Tenkici
-Mala jurnjava 
+Procitaj ako hoces.
+---
+##Lista
+* Inicijalno punjenje
