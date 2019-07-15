@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "tENK.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
@@ -14,4 +15,8 @@ class TENKICI_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
+public:
+	AtENK* UzmiKontrolisanogTenka() const;
+
+	void BeginPlay() override;
 };
