@@ -28,7 +28,6 @@ void ATankPlayerController::BeginPlay()
 void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	UE_LOG(LogTemp, Warning, TEXT("Imam tik"))
 	AimToward();
 }
 
@@ -43,19 +42,29 @@ AtENK* ATankPlayerController::UzmiKontrolisanogTenka() const
 void ATankPlayerController::AimToward()
 {
 	if (!UzmiKontrolisanogTenka()) { return; }
-	FVector HitLocation;
-	if (GetSightRayHitLocation(HitLocation))
+	FVector HitLocation;//out parametar
+	if (GetSightRayHitLocation(HitLocation)) //has "side-efect" is going line trace
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Hit location: %s"), *HitLocation.ToString());
+		//UE_LOG(LogTemp, Warning, TEXT("Hit location: %s"), *HitLocation.ToString());
 	}
 	
 }
 
 
-
-bool ATankPlayerController::GetSightRayHitLocation(FVector & HitLocation) const
+//Get world location of linetrace	throught corsshair, true if hit landscape
+bool ATankPlayerController::GetSightRayHitLocation(FVector & HitLocation)const
 {
-	HitLocation = FVector(1.0f);
+	//Find crosshead postion in pixel coordinates
+	int32 ViewportSizeX, ViewportSizeY;
+	GetViewportSize(ViewportSizeX, ViewportSizeY);
+	auto PrviPresek = ViewportSizeX * CrossHairXLocation;
+	auto DrugiPresek = ViewportSizeY * CrossHairYLocation;
+	FVector2D ScreenLocation = FVector2D(PrviPresek, DrugiPresek);
+	
+	//"De-project" the screen postion of the crosshead to a world direction
+
+
+	//Line-trace along that look direction, and see what we hit (Up to MAX range)
 	return true;
 }
 
