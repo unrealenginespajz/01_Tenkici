@@ -25,10 +25,20 @@ void ATankAIController::BeginPlay()
 }
 
 
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	AimToward();
+}
+
+
+
 AtENK * ATankAIController::UzmiKontrolisanogAITenka() const
 {
 	return Cast<AtENK>(GetPawn());
 }
+
+
 
 AtENK* ATankAIController::PronadjiTenkPlayerControlera() const
 {
@@ -44,4 +54,11 @@ AtENK* ATankAIController::PronadjiTenkPlayerControlera() const
 		return  nullptr;
 		
 	}
+}
+
+void ATankAIController::AimToward()
+{
+	if (!UzmiKontrolisanogAITenka()) { return; }
+	
+
 }
