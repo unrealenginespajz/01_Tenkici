@@ -15,11 +15,9 @@ class TENKICI_API ATankAIController : public AAIController
 	GENERATED_BODY()
 public:
 	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime) override;
+
 
 	AtENK* UzmiKontrolisanogAITenka() const;
 	AtENK* PronadjiTenkPlayerControlera() const;
-	//Start tenkt the moving the barrel so that shoot would hit where 
-	//the crosshair intersect the world
-	void AimToward();
+	
 };

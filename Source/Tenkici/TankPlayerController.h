@@ -19,4 +19,14 @@ public:
 	AtENK* UzmiKontrolisanogTenka() const;
 
 	void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+
+
+private:
+
+	//Start tenkt the moving the barrel so that shoot would hit where 
+	//the crosshair intersect the world
+	void AimToward();
+	//return OUT parametar, true if hit landscape
+	bool GetSightRayHitLocation(FVector& HitLocation) const;
 };

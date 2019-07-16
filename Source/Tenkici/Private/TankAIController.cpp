@@ -25,12 +25,6 @@ void ATankAIController::BeginPlay()
 }
 
 
-void ATankAIController::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-	AimToward();
-}
-
 
 
 AtENK * ATankAIController::UzmiKontrolisanogAITenka() const
@@ -56,9 +50,4 @@ AtENK* ATankAIController::PronadjiTenkPlayerControlera() const
 	}
 }
 
-void ATankAIController::AimToward()
-{
-	if (!UzmiKontrolisanogAITenka()) { return; }
-	
 
-}
