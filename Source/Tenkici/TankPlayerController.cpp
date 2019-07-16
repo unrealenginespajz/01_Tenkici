@@ -62,10 +62,26 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & HitLocation)const
 	FVector2D ScreenLocation = FVector2D(PrviPresek, DrugiPresek);
 	
 	//"De-project" the screen postion of the crosshead to a world direction
-
-
-	//Line-trace along that look direction, and see what we hit (Up to MAX range)
+	FVector WorldDirection;
+	if (GetLookDirection(ScreenLocation,WorldDirection))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("LookDIrection %s"), *WorldDirection.ToString());
+	}
 	return true;
+}
+
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& WorldDirection) const
+{
+	//ovaj ne koristimo ali moramo da mu damo da upise....ovo je kamerina lokacija mislim
+	FVector CameraWorldLocation;
+
+
+return	DeprojectScreenPositionToWorld(
+		ScreenLocation.X, 
+		ScreenLocation.Y, 
+		CameraWorldLocation, 
+		WorldDirection);
+
 }
 
 //bool ATankPlayerController::GetSightRayHitLocation() const
