@@ -9,7 +9,6 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("TankPlayerControler begin play"));
 
 	AtENK* ovaj = UzmiKontrolisanogTenka();
 	if (ovaj)
@@ -45,9 +44,8 @@ void ATankPlayerController::AimToward()
 	FVector HitLocation;//out parametar
 	if (GetSightRayHitLocation(HitLocation)) //has "side-efect" is going line trace
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("Hit location: %s"), *HitLocation.ToString());
-	}
-	
+		UE_LOG(LogTemp, Warning, TEXT("Hit Location %s"), *HitLocation.ToString());
+	}	
 }
 
 
@@ -65,7 +63,10 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & HitLocation)const
 	FVector WorldDirection;
 	if (GetLookDirection(ScreenLocation,WorldDirection))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("LookDIrection %s"), *WorldDirection.ToString());
+		//Line-trace along that LookDirection,and see what hit (up to max range)
+
+		GetLookHitLocation(WorldDirection, HitLocation);
+	
 	}
 	return true;
 }
@@ -81,27 +82,22 @@ return	DeprojectScreenPositionToWorld(
 		ScreenLocation.Y, 
 		CameraWorldLocation, 
 		WorldDirection);
-
 }
 
-//bool ATankPlayerController::GetSightRayHitLocation() const
-//{
-//	FVector Pocetak;
-//	FRotator Rotacija;
-//	FVector Kraj;
-//	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(Pocetak, Rotacija);
-//	Kraj = Pocetak + Rotacija.Vector() * 3400.f;
-//	FHitResult Hit;
-//	FCollisionQueryParams KurParam(FName(TEXT("")), false, GetOwner());
-//	bool sarma = GetWorld()->LineTraceSingleByObjectType(Hit, Pocetak, Kraj, ECollisionChannel::ECC_PhysicsBody, KurParam);
-//	if (sarma)
-//	{
-//		UE_LOG(LogTemp, Warning, TEXT("Gledamo %s"), *(Hit.Actor->GetName()));
-//		return true;
-//	}
-//	else
-//	{
-//		UE_LOG(LogTemp, Warning, TEXT("Nista ne gledamo"), );
-//		return false;
-//	}
-//}
+bool ATankPlayerController::GetLookHitLocation(FVector LookDirection, FVector& HitLocation) const
+{
+	FHitResult Hit;
+	FVector Pocetak = PlayerCameraManager->GetCameraLocation();
+	FVector Kraj ;
+	Kraj = Pocetak + (LookDirection * LineTraceRange);
+
+	if (GetWorld()->LineTraceSingleByChannel(
+		Hit, Pocetak, Kraj, ECollisionChannel::ECC_Visibility))
+	{
+		HitLocation = Hit.Location;//Konvertujemo HitResult u FVector
+		return true;
+	}
+	HitLocation = FVector(0);
+	return false;//nismo nista pogodili pogledom
+
+}

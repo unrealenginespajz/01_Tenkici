@@ -40,7 +40,6 @@ AtENK* ATankAIController::PronadjiTenkPlayerControlera() const
 
 	if (Nesto)
 	{
-
 		return Cast<AtENK>(Nesto);
 	}
 	else
