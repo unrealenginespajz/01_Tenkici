@@ -5,6 +5,13 @@
 #include "GameFramework/Actor.h"
 #include "GameFramework/PlayerController.h"
 #include "Components/PrimitiveComponent.h"
+#include "Public/DrawDebugHelpers.h"
+
+//KAKO CILJAMO SA TENKOM !!!
+//Treba da nadjemo LineTraceSinge ovog puta po kanalu(Visible) znaci sto vidimo.To nam zahteva pocetak i rotaciju
+//kao ulazne parametre...pocetak uzimamo preko CameraManager i uzmemo lokaciju kamere....
+//za rotaciju je potrebno prvo da uzmemo lokaciju nisaana pa uz pomoc DeprojectScreenPositionToWorld 
+//uzmemo FVector rotaciju tog nisana i tako na kraju dobijemo HitResult koji pretvorimo u FVector
 
 void ATankPlayerController::BeginPlay()
 {
@@ -41,56 +48,67 @@ AtENK* ATankPlayerController::UzmiKontrolisanogTenka() const
 void ATankPlayerController::AimToward()
 {
 	if (!UzmiKontrolisanogTenka()) { return; }
-	FVector HitLocation;//out parametar
-	if (GetSightRayHitLocation(HitLocation)) //has "side-efect" is going line trace
+	FVector LokacijaNisanPogotka;//out parametar
+	if (GetLokacijaPogodtkaNisana(LokacijaNisanPogotka)) //has "side-efect" is going line trace
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Hit Location %s"), *HitLocation.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("Hit Location %s"), *LokacijaNisanPogotka.ToString());
 	}	
 }
 
 
 //Get world location of linetrace	throught corsshair, true if hit landscape
-bool ATankPlayerController::GetSightRayHitLocation(FVector & HitLocation)const
+bool ATankPlayerController::GetLokacijaPogodtkaNisana(FVector & HitLocation)const
 {
-	//Find crosshead postion in pixel coordinates
+	//Pronadjemo lokaciju nisana u koordinatnom sistemu
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	auto PrviPresek = ViewportSizeX * CrossHairXLocation;
 	auto DrugiPresek = ViewportSizeY * CrossHairYLocation;
-	FVector2D ScreenLocation = FVector2D(PrviPresek, DrugiPresek);
+	FVector2D LokacijaNisana = FVector2D(PrviPresek, DrugiPresek);
 	
-	//"De-project" the screen postion of the crosshead to a world direction
-	FVector WorldDirection;
-	if (GetLookDirection(ScreenLocation,WorldDirection))
+	//"De-project" poziciju nisana na svet lokaciju
+	FVector RotacijaNisana;
+	if (PravacGledanjaNisana(LokacijaNisana,RotacijaNisana))
 	{
 		//Line-trace along that LookDirection,and see what hit (up to max range)
 
-		GetLookHitLocation(WorldDirection, HitLocation);
+		LineTracePogodak(RotacijaNisana, HitLocation);
 	
 	}
 	return true;
 }
 
-bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& WorldDirection) const
+bool ATankPlayerController::PravacGledanjaNisana(FVector2D LokacijaNisana, FVector& WorldDirection) const
 {
 	//ovaj ne koristimo ali moramo da mu damo da upise....ovo je kamerina lokacija mislim
 	FVector CameraWorldLocation;
 
 
 return	DeprojectScreenPositionToWorld(
-		ScreenLocation.X, 
-		ScreenLocation.Y, 
+		LokacijaNisana.X, 
+		LokacijaNisana.Y, 
 		CameraWorldLocation, 
 		WorldDirection);
 }
 
-bool ATankPlayerController::GetLookHitLocation(FVector LookDirection, FVector& HitLocation) const
+bool ATankPlayerController::LineTracePogodak(FVector RotacijaNisana, FVector& HitLocation) const
 {
 	FHitResult Hit;
+
+	//!!!! da kao pocetak uzimamo GetfirsPlayercontroler ActorEyesView onda bi dosta promasivali jer je to lokacija tacno ispod tenka
 	FVector Pocetak = PlayerCameraManager->GetCameraLocation();
 	FVector Kraj ;
-	Kraj = Pocetak + (LookDirection * LineTraceRange);
+	Kraj = Pocetak + (RotacijaNisana * LineTraceRange);
 
+	DrawDebugLine(
+		GetWorld(),
+		Pocetak,
+		Kraj,
+		FColor(255, 0, 0),
+		false, -1, 0,
+		5
+	);
+	//ECC_Visibility ako ga vidimo onda ga pogadjamo...naravno na distancu koju postovimo
 	if (GetWorld()->LineTraceSingleByChannel(
 		Hit, Pocetak, Kraj, ECollisionChannel::ECC_Visibility))
 	{

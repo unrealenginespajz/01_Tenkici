@@ -28,12 +28,11 @@ private:
 	//the crosshair intersect the world
 	void AimToward();
 	//return OUT parametar, true if hit landscape
-	bool GetSightRayHitLocation(FVector& HitLocation) const;
+	bool GetLokacijaPogodtkaNisana(FVector& HitLocation) const;
 
-
+	//ovako smo postavili na UI nisan razmeru na odnosu na screen
 	UPROPERTY(EditAnywhere)
 		float CrossHairXLocation = 0.5f;
-
 	UPROPERTY(EditAnywhere)
 		float CrossHairYLocation = 0.3333f;
 
@@ -41,6 +40,6 @@ private:
 		float LineTraceRange = 1000000.0f;
 
 
-	bool GetLookDirection(FVector2D ScreenLocation, FVector& WorldDirection) const;
-	bool GetLookHitLocation(FVector LookDirection, FVector& HitLocation) const;
+	bool PravacGledanjaNisana(FVector2D ScreenLocation, FVector& WorldDirection) const;
+	bool LineTracePogodak(FVector LookDirection, FVector& HitLocation) const;
 };

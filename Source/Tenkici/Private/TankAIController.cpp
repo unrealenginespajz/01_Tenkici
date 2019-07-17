@@ -14,11 +14,11 @@ void ATankAIController::BeginPlay()
 	if (ovaj)
 	{
 		FString ImeZaposdnutogTenka = ovaj->GetName();
-		UE_LOG(LogTemp, Warning, TEXT("Ime AI zaposednutog tenka je %s"), *ImeZaposdnutogTenka);
+		UE_LOG(LogTemp, Warning, TEXT("Tenk igraca koji treba unistiti je  %s"), *ImeZaposdnutogTenka);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Nema AI zaposdnutog tenka"));
+		UE_LOG(LogTemp, Warning, TEXT("Nema tenka igraca koga treba unistiti"));
 	}
 
 
