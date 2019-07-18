@@ -6,6 +6,7 @@
 #include "Classes/GameFramework/Actor.h"
 #include "Classes/Engine/World.h"
 #include "Classes/GameFramework/PlayerController.h"
+#include "Public/DrawDebugHelpers.h"
 
 void ATankAIController::BeginPlay()
 {
@@ -27,6 +28,23 @@ void ATankAIController::BeginPlay()
 
 
 
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (!UzmiKontrolisanogAITenka()) { return; }
+	//FVector LokacijaIgraca = GetWorld()->GetFirstPlayerController()->GetPawn()-> GetActorLocation();
+	UzmiKontrolisanogAITenka()->Naciljaj(PronadjiTenkPlayerControlera()->GetActorLocation());
+
+	DrawDebugLine(
+		GetWorld(),
+		UzmiKontrolisanogAITenka()->GetActorLocation(),
+		PronadjiTenkPlayerControlera()->GetActorLocation(),
+		FColor(255, 0, 0),
+		false, -1, 0,
+		5
+	);
+}
+
 AtENK * ATankAIController::UzmiKontrolisanogAITenka() const
 {
 	return Cast<AtENK>(GetPawn());
@@ -44,8 +62,7 @@ AtENK* ATankAIController::PronadjiTenkPlayerControlera() const
 	}
 	else
 	{
-		return  nullptr;
-		
+		return  nullptr;	
 	}
 }
 

@@ -14,6 +14,7 @@ class TENKICI_API AtENK : public APawn
 public:
 	// Sets default values for this pawn's properties
 	AtENK();
+	void Naciljaj(FVector LokacijaNisanPogotka);
 
 protected:
 	// Called when the game starts or when spawned

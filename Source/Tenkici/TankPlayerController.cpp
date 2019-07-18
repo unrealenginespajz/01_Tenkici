@@ -51,7 +51,7 @@ void ATankPlayerController::AimToward()
 	FVector LokacijaNisanPogotka;//out parametar
 	if (GetLokacijaPogodtkaNisana(LokacijaNisanPogotka)) //has "side-efect" is going line trace
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Hit Location %s"), *LokacijaNisanPogotka.ToString());
+		UzmiKontrolisanogTenka()->Naciljaj(LokacijaNisanPogotka);
 	}	
 }
 

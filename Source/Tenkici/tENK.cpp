@@ -11,6 +11,8 @@ AtENK::AtENK()
 
 }
 
+
+
 // Called when the game starts or when spawned
 void AtENK::BeginPlay()
 {
@@ -32,3 +34,8 @@ void AtENK::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void AtENK::Naciljaj(FVector LokacijaNisanPogotka)
+{
+	auto ImeTenka = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s je naciljao %s"),*ImeTenka, *LokacijaNisanPogotka.ToString());
+}
