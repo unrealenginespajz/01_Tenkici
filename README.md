@@ -28,3 +28,10 @@ Procitaj ako hoces.
 
 *	Pravimo funkciju Nacijalj koja ima ulazni parametar Pawn tako da moze da ga koristi i player i ai tank
 
+* 	Funkciju Naciljaj prebacimo u posenu komponentu. To je opcionu, verovato u praksi napravicemo u tenku a onda cemo odluciti da li treba posebna komponenta
+	pogotovo ako se ona cesto koristi. Mi prebacujemo pogotovo sto ce mo to korisititi i za movment(ovo cu objasniti kad budemo radili)
+
+*	1.1 Pravimo c++ Actor Component. deklarisemo ga u AtEnku pod protected, zato sto ne moze da bude private jer moramo da koristimo UPROPERTU kasine a za to ne moze private
+	a public ne treba jer to je stvar teknak sta se koga tice ostalog to :).Prebacujemo logiku iz AtENK naciljaj u UNaciljajKompontu...POTPIS OSTAJE U AtEnku.
+	
+*	

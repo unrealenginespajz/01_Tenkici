@@ -8,7 +8,7 @@ AtENK::AtENK()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	TenkuNaciljaj = CreateDefaultSubobject<UTenkNaciljajKomponenta>(FName("Komponenta Naciljaj"));
 }
 
 
@@ -36,6 +36,6 @@ void AtENK::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AtENK::Naciljaj(FVector LokacijaNisanPogotka)
 {
-	auto ImeTenka = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s je naciljao %s"),*ImeTenka, *LokacijaNisanPogotka.ToString());
+	TenkuNaciljaj->Naciljaj(LokacijaNisanPogotka);
+	
 }
