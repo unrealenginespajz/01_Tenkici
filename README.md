@@ -34,4 +34,10 @@ Procitaj ako hoces.
 *	1.1 Pravimo c++ Actor Component. deklarisemo ga u AtEnku pod protected, zato sto ne moze da bude private jer moramo da koristimo UPROPERTU kasine a za to ne moze private
 	a public ne treba jer to je stvar teknak sta se koga tice ostalog to :).Prebacujemo logiku iz AtENK naciljaj u UNaciljajKompontu...POTPIS OSTAJE U AtEnku.
 	
-*	
+*	1.2.
+	-Ovde je poenta kako da capimo StaticMash (Cevku) i da uzmemo njenu poziciju. Skraceno- preko tenka uzimamo iz BP cevku i prosledjuemo naciljaj komponenti
+	Posto je za putanju projektila potrebno pored toga de pogadjamo sto vec imamo (hitlocation) potrebno da znamo i pocetak a to je pocetak barela u Actor Componenti UNaciljajKomponenti
+	prvo pronalazimo barrel(cevku). Napravili smo metodu u komponenti ANaciljajKomponenta i istu taku u Atenku ali tamo stmo stavili 
+	UFUNCTION(BlueprintCallable,Category = Setup) da bi mogli da preuzmemo tu varijabili cevku iz BP i onda smo delegirali iz Atenka u anaciljakompnen TenkuNaciljaj->SetBarrelReference(CevkaIzBP);
+
+

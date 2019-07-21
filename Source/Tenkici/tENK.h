@@ -19,6 +19,9 @@ public:
 	AtENK();
 	void Naciljaj(FVector LokacijaNisanPogotka);
 
+	UFUNCTION(BlueprintCallable,Category = Setup)
+	void UzmiBarrel(UStaticMeshComponent* CevkaIzBP);
+
 protected:
 	UTenkNaciljajKomponenta* TenkuNaciljaj = nullptr;
 

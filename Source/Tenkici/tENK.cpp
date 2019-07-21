@@ -39,3 +39,8 @@ void AtENK::Naciljaj(FVector LokacijaNisanPogotka)
 	TenkuNaciljaj->Naciljaj(LokacijaNisanPogotka);
 	
 }
+
+void AtENK::UzmiBarrel(UStaticMeshComponent * CevkaIzBP)
+{ 
+	TenkuNaciljaj->SetBarrelReference(CevkaIzBP);
+}

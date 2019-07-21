@@ -3,6 +3,18 @@
 
 #include "TenkNaciljajKomponenta.h"
 
+
+
+// Called when the game starts
+void UTenkNaciljajKomponenta::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// ...
+
+}
+
+
 // Sets default values for this component's properties
 UTenkNaciljajKomponenta::UTenkNaciljajKomponenta()
 {
@@ -14,14 +26,12 @@ UTenkNaciljajKomponenta::UTenkNaciljajKomponenta()
 }
 
 
-// Called when the game starts
-void UTenkNaciljajKomponenta::BeginPlay()
+void UTenkNaciljajKomponenta::SetBarrelReference(UStaticMeshComponent * AOvaCevka)
 {
-	Super::BeginPlay();
-
-	// ...
-	
+	Barrel = AOvaCevka;
 }
+
+
 
 
 // Called every frame
@@ -34,7 +44,8 @@ void UTenkNaciljajKomponenta::TickComponent(float DeltaTime, ELevelTick TickType
 
 void UTenkNaciljajKomponenta::Naciljaj(FVector LokacijaNisanPogotka)
 {
-	auto ImeTenka =GetOwner()-> GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s je naciljao %s"), *ImeTenka, *LokacijaNisanPogotka.ToString());
+	auto ImeTenka =GetOwner() -> GetName();
+	auto LokacijaCevke = Barrel->GetComponentLocation().ToString();
+	UE_LOG(LogTemp, Warning, TEXT("%s je naciljao %s sa lokacije %s"), *ImeTenka, *LokacijaNisanPogotka.ToString(),*LokacijaCevke);
 }
 
