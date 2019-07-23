@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "Kismet/GameplayStatics.h"
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "TenkNaciljajKomponenta.generated.h"
@@ -23,7 +23,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	void Naciljaj(FVector LokacijaNisanPogotka);
+	void Naciljaj(FVector LokacijaNisanPogotka,float BrzinaMetka);
 		
 private:
 	UStaticMeshComponent* Barrel = nullptr;

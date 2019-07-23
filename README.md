@@ -41,3 +41,7 @@ Procitaj ako hoces.
 	UFUNCTION(BlueprintCallable,Category = Setup) da bi mogli da preuzmemo tu varijabili cevku iz BP i onda smo delegirali iz Atenka u anaciljakompnen TenkuNaciljaj->SetBarrelReference(CevkaIzBP);
 
 
+* 	1.3
+	Ovde je dobra fora kako smo uzeli startnu poziciju odakle metak treba da krene a to je vrh cevke. U BP_Barrel dodali smo prazan zocket i onda smo u kogu uz pomoc njegovog imena
+	uzeli njegovu lokaciju. 
+	Posle toga pozvlai smo staticku funkciju UGameplayStatics::SuggestProjectileVelocity. OVO CU OBNOVITI NA KRAJU DA VIDIM STA JE FORA SA OVIM

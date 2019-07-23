@@ -36,7 +36,7 @@ void AtENK::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AtENK::Naciljaj(FVector LokacijaNisanPogotka)
 {
-	TenkuNaciljaj->Naciljaj(LokacijaNisanPogotka);
+	TenkuNaciljaj->Naciljaj(LokacijaNisanPogotka, BrzinaPucnja);
 	
 }
 

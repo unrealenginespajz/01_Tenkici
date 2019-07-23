@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Classes/Components/StaticMeshComponent.h"
 
 #include "TenkNaciljajKomponenta.h"
 
@@ -42,10 +43,24 @@ void UTenkNaciljajKomponenta::TickComponent(float DeltaTime, ELevelTick TickType
 	// ...
 }
 
-void UTenkNaciljajKomponenta::Naciljaj(FVector LokacijaNisanPogotka)
+void UTenkNaciljajKomponenta::Naciljaj(FVector LokacijaNisanPogotka,float BrzinaMetka)
+
 {
-	auto ImeTenka =GetOwner() -> GetName();
-	auto LokacijaCevke = Barrel->GetComponentLocation().ToString();
-	UE_LOG(LogTemp, Warning, TEXT("%s je naciljao %s sa lokacije %s"), *ImeTenka, *LokacijaNisanPogotka.ToString(),*LokacijaCevke);
+	if (!Barrel) { return; }
+
+	FVector OutLounchVelocity;
+	FVector StartLocation = Barrel->GetSocketLocation(FName("StartPozicijaProjektila"));
+	//suggest je staticka kalasa zato ovako zovemo
+	
+	if (UGameplayStatics::SuggestProjectileVelocity(
+		this, OutLounchVelocity, StartLocation, LokacijaNisanPogotka, BrzinaMetka,
+		false,0,ESuggestProjVelocityTraceOption::DoNotTrace ))
+	{
+		auto PravacCiljana = OutLounchVelocity.GetSafeNormal();
+		auto ImeTenka = GetOwner()->GetName();
+		UE_LOG(LogTemp, Warning, TEXT("%s nisani u %s"),*ImeTenka, *PravacCiljana.ToString());
+	}
+
+	
 }
 
