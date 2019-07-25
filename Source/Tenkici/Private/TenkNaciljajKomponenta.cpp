@@ -1,18 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Classes/Components/StaticMeshComponent.h"
+
 
 #include "TenkNaciljajKomponenta.h"
-
+#include "Classes/Components/StaticMeshComponent.h"
 
 
 // Called when the game starts
 void UTenkNaciljajKomponenta::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// ...
-
+	
 }
 
 
@@ -22,8 +20,7 @@ UTenkNaciljajKomponenta::UTenkNaciljajKomponenta()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
+	
 }
 
 
@@ -59,8 +56,6 @@ void UTenkNaciljajKomponenta::Naciljaj(FVector LokacijaNisanPogotka,float Brzina
 		auto PravacCiljana = OutLounchVelocity.GetSafeNormal();
 		auto ImeTenka = GetOwner()->GetName();
 		UE_LOG(LogTemp, Warning, TEXT("%s nisani u %s"),*ImeTenka, *PravacCiljana.ToString());
-	}
-
-	
+	}	
 }
 
