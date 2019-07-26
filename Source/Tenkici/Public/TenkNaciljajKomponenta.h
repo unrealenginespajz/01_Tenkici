@@ -16,15 +16,9 @@ public:
 	// Sets default values for this component's properties
 	UTenkNaciljajKomponenta();
 	void SetBarrelReference(UStaticMeshComponent* AOvaCevka);
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	void Naciljaj(FVector LokacijaNisanPogotka,float BrzinaMetka);
 		
 private:
 	UStaticMeshComponent* Barrel = nullptr;
+	void MoveBarrel(FVector AimDirection) const;
 };
