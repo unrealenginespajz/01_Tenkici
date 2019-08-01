@@ -17,7 +17,6 @@ class TENKICI_API ATankPlayerController : public APlayerController
 	
 public:
 	AtENK* UzmiKontrolisanogTenka() const;
-
 	void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 

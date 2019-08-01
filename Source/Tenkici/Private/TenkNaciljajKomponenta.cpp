@@ -18,17 +18,17 @@ UTenkNaciljajKomponenta::UTenkNaciljajKomponenta()
 
 void UTenkNaciljajKomponenta::SetBarrelReference(UStaticMeshComponent * AOvaCevka)
 {
-	Barrel = AOvaCevka;
+	SM_Cevka = AOvaCevka;
 }
 
 
 void UTenkNaciljajKomponenta::Naciljaj(FVector LokacijaNisanPogotka,float BrzinaMetka)
 
 {
-	if (!Barrel) { return; }
+	if (!SM_Cevka) { return; }
 
 	FVector OutLounchVelocity;
-	FVector StartLocation = Barrel->GetSocketLocation(FName("StartPozicijaProjektila"));
+	FVector StartLocation = SM_Cevka->GetSocketLocation(FName("StartPozicijaProjektila"));
 	//suggest je staticka kalasa zato ovako zovemo
 	//posle brzine metka sledeca tri parametra imaju defoutlne vrednosti zato ih sklanjamo i ovako ih ne menjamo
 	if (UGameplayStatics::SuggestProjectileVelocity(
@@ -54,7 +54,7 @@ void UTenkNaciljajKomponenta::MoveBarrel(FVector AimDirection) const
 	//dati mu maximalnu brzinu(ovoga se nisam setio ja )
 	
 	//pozicija barela po x osi i onda ptrtvaramo u Rotation tj. peach, yawl, rotation
-	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto BarrelRotator = SM_Cevka->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 	UE_LOG(LogTemp, Warning, TEXT("AimAsRotator %s"), *AimAsRotator.ToString());

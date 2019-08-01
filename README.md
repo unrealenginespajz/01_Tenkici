@@ -2,7 +2,7 @@ Procitaj ako hoces.
 ---
 ##  TANK
 
-*	Pravimo BP_TENK  dodajemo StaticMash komponente 
+*	Pravimo BP_TENK - PAWN dodajemo StaticMash komponente 
 
 *	Da bi to bila komaktna Celina dodajemo sockete…na telo stavljamo sockete levu I desnu gusenicu I barrel, na barel cevku
 

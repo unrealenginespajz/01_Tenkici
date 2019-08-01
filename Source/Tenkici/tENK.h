@@ -13,11 +13,9 @@ class TENKICI_API AtENK : public APawn
 	GENERATED_BODY()
 
 public:
-	// Called when the game starts or when spawned
+
 	virtual void BeginPlay() override;
-	// Sets default values for this pawn's properties
 	AtENK();
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 

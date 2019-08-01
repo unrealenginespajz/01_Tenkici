@@ -13,12 +13,14 @@ class TENKICI_API UTenkNaciljajKomponenta : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
+	// Konstruktor
 	UTenkNaciljajKomponenta();
+
 	void SetBarrelReference(UStaticMeshComponent* AOvaCevka);
+
 	void Naciljaj(FVector LokacijaNisanPogotka,float BrzinaMetka);
 		
 private:
-	UStaticMeshComponent* Barrel = nullptr;
+	UStaticMeshComponent* SM_Cevka = nullptr;
 	void MoveBarrel(FVector AimDirection) const;
 };
